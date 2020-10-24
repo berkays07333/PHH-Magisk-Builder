@@ -56,3 +56,10 @@ jobs:
           asset_path: ./release/magisk-phh.zip
           asset_name: magisk-phh.zip
           asset_content_type: application/octet-stream
+
+    - name: Upload to Telegram
+      env:
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          BOT_TOKEN: ${{ secrets.CHAT_ID }}
+      run: |
+          curl -F 'disable_notification=true' -F "chat_id=$CHAT_ID" -F 'parse_mode=markdown' -F caption="PHH Magisk Build Completed on `git log -1 --format=%cd`." -F document="./release/magisk-phh.zip" -X POST https://api.telegram.org/bot$BOT_TOKEN/sendDocument
