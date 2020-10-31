@@ -1,4 +1,11 @@
-name: Build
+name: Build Starting..
+
+on: 
+  #releasepush:
+    #pushbuild
+
+  watch: 
+      types: [started]
 
 on:
   push:
